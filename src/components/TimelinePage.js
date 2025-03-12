@@ -1,4 +1,5 @@
 import React from 'react';
+import LineChart from './LineChart';
 
 const TimelinePage = () => {
   return (
@@ -13,7 +14,17 @@ const TimelinePage = () => {
         <button className="filter-button">BUTTON</button>
       </div>
       
-
+      <div className="timeline-chart">
+        <div className="chart-container">
+          <div className="y-axis-label">
+            <h2 className="vertical-text">HEADER</h2>
+          </div>
+          <LineChart />
+          <div className="x-axis-label">
+            <h2>HEADER</h2>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

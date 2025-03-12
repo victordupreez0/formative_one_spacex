@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import PieChart from './PieChart';
+import PentagonChart from './PentagonChart';
+
 
 const ComparePage = () => {
   const [launch1, setLaunch1] = useState(null);
@@ -22,10 +25,12 @@ const ComparePage = () => {
           
           <div className="data-card">
             <h3>HEADER</h3>
+            <PieChart />
           </div>
           
           <div className="data-card">
             <h3>HEADER</h3>
+            <PentagonChart />
           </div>
         </div>
 
@@ -56,10 +61,12 @@ const ComparePage = () => {
           
           <div className="data-card">
             <h3>HEADER</h3>
+            <PieChart />
           </div>
           
           <div className="data-card">
             <h3>HEADER</h3>
+            <PentagonChart />
           </div>
         </div>
       </div>
