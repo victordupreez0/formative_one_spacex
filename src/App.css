@@ -11,8 +11,29 @@
 }
 
 body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
   background-color: #121212;
   color: white;
+  overflow-x: hidden; /* Prevent horizontal scrolling on the body */
+}
+
+.App {
+  text-align: center;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box; /* Include padding in width calculation */
+}
+
+.App-header {
+  margin-bottom: 40px;
+}
+
+.App-header h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
 }
 
 .app {
@@ -68,9 +89,18 @@ body {
 }
 
 /* Home Page */
+.home-page {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 100%;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
 .hero-section {
-  height: 300px;
-  background-color: #333;
+  height: 500px;
+  background-image: url(../src/Images/homeBG.jpg);
+  background-size: cover;
   margin-bottom: 30px;
   display: flex;
   align-items: center;
@@ -96,8 +126,13 @@ body {
 }
 
 .big-header {
-  font-size: 36px;
+  font-size: 48px;
+}
+
+.big-header2 {
+  font-size: 64px;
   margin-bottom: 15px;
+  margin-top: 0px;
 }
 
 .hero-text {
@@ -144,62 +179,176 @@ body {
   font-weight: bold;
 }
 
-.launch-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 20px;
-  margin-bottom: 30px;
+/* Launch section */
+.section-title {
+  text-align: left;
+  margin-bottom: 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #ccc;
 }
 
+.launch-container {
+  width: 100%;
+  overflow-x: auto; /* Allow horizontal scrolling for the launch list */
+}
+
+.launch-list {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  padding-bottom: 20px;
+  scrollbar-width: thin;
+  scrollbar-color: #666 #222;
+}
+
+.launch-list::-webkit-scrollbar {
+  height: 8px;
+}
+
+.launch-list::-webkit-scrollbar-track {
+  background: #222;
+  border-radius: 4px;
+}
+
+.launch-list::-webkit-scrollbar-thumb {
+  background-color: #666;
+  border-radius: 4px;
+}
+
+/* Launch Card Styling */
 .launch-card {
+  min-width: 240px;
+  max-width: 240px;
   background-color: #333;
-  border-radius: 5px;
+  border-radius: 12px;
   overflow: hidden;
-  height: 250px;
-  position: relative;
-}
-
-.launch-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-size: 100% 100%;
-  z-index: 1;
-}
-
-.card-content {
-  position: relative;
-  z-index: 2;
-  padding: 15px;
-  height: 100%;
   display: flex;
   flex-direction: column;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s;
 }
 
-.card-content h2 {
-  margin-bottom: 10px;
-  font-size: 16px;
+.launch-card:hover {
+  transform: translateY(-5px);
 }
 
-.card-content p {
+.launch-image {
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background: #222;
+  position: relative;
+}
+
+.launch-image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.placeholder-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 48px;
+  color: #555;
+  width: 100%;
+  height: 100%;
+}
+
+.launch-content {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  text-align: left;
+}
+
+.launch-name {
+  margin: 0 0 5px 0;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.rocket-name {
+  font-size: 14px;
+  margin: 0 0 3px 0;
+  color: #ccc;
+}
+
+.mission-outcome {
   font-size: 12px;
-  line-height: 1.4;
-  margin-bottom: 15px;
+  margin: 0 0 10px 0;
+  color: #aaa;
+}
+
+.launch-details {
+  margin: 0 0 15px 0;
+  font-size: 12px;
+  color: #ddd;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
   flex-grow: 1;
 }
 
-.card-button {
+.detail-button {
   align-self: flex-start;
-  padding: 5px 10px;
-  background-color: transparent;
-  color: white;
+  background: transparent;
   border: 1px solid white;
+  color: white;
+  padding: 5px 15px;
   border-radius: 15px;
-  font-size: 10px;
   cursor: pointer;
+  font-size: 12px;
+  text-transform: uppercase;
+  transition: all 0.2s;
+}
+
+.detail-button:hover {
+  background: white;
+  color: #333;
+}
+
+.search-container {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.search-input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px 0 0 4px;
+}
+
+.search-button {
+  padding: 10px 20px;
+  background-color: #222;
+  color: white;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+}
+
+.search-button:hover {
+  background-color: #444;
+}
+
+.error-message {
+  color: red;
+  margin-top: 5px;
+}
+
+.rocket-info, .launch-technical-info {
+  margin-top: 10px;
 }
 
 .launch-lookup {
@@ -225,7 +374,7 @@ body {
   border-radius: 5px;
   padding: 20px;
   position: relative;
-  height: 250px;
+  height: 70vh;
 }
 
 .featured-launch::before {
@@ -431,4 +580,25 @@ body {
   left: 0;
   right: 0;
   text-align: center;
+}
+
+.dropdown {
+  position: absolute;
+  border: 1px solid #ccc;
+  width: 30%;
+  max-height: 200px;
+  overflow-y: auto;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  background: #000000;
+  z-index: 1000; /* Ensure the dropdown is above other elements */
+}
+
+.dropdown-item {
+  padding: 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.dropdown-item:hover {
+  background: rgb(19, 19, 19);
 }
