@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import SLogo from '../Images/SpaceX_Logo1.svg';
 import LaunchList from './LaunchList';
+import Button from './Button';
 import '../comp_styles/HomePage.css';
 
 const HomePage = () => {
@@ -29,8 +30,11 @@ const HomePage = () => {
         const rocketsData = await rocketsResponse.json();
         setTotalRockets(rocketsData.length);
 
-        // Set a random launch as the featured launch
-        const randomLaunch = launchesData[Math.floor(Math.random() * launchesData.length)];
+        // Set a random launch as the featured launch with an image
+        let randomLaunch;
+        do {
+          randomLaunch = launchesData[Math.floor(Math.random() * launchesData.length)];
+        } while (!randomLaunch.links.flickr.original.length);
         setFeaturedLaunch(randomLaunch);
 
         // Fetch rocket info for the featured launch
@@ -148,12 +152,8 @@ const HomePage = () => {
             launches up to 2022. But still, it shows off that React do code
           </p>
           <div className="button-group">
-            <a href='https://github.com/r-spacex/SpaceX-API/tree/master/docs' target='_blank'>
-            <button className="action-button">API Docs</button>
-            </a>
-            <a href='https://www.spacex.com/' target="_blank">
-            <button className="action-button">SpaceX Official</button>
-            </a>
+            <Button href={'https://github.com/r-spacex/SpaceX-API/tree/master/docs'}>API Docs</Button>
+            <Button href={'https://www.spacex.com/'}>SpaceX Official</Button>
           </div>
         </div>
       </div>
@@ -233,10 +233,9 @@ const HomePage = () => {
                 <a href={featuredLaunch.links.article} target="_blank" rel="noopener noreferrer" className="action-button">ARTICLE</a>
               )}
               {!featuredLaunch && (
-                <>
+
                   <button className="action-button">BUTTON</button>
-                  <button className="action-button">BUTTON</button>
-                </>
+
               )}
             </div>
           </div>

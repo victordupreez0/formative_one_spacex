@@ -19,10 +19,16 @@ const LaunchList = () => {
         
         const data = await response.json();
         
+        // Filter launches up to 2019 and exclude upcoming launches
+        const filteredLaunches = data.filter(launch => {
+          const launchDate = new Date(launch.date_utc);
+          return launchDate.getFullYear() <= 2019 && launch.success !== null;
+        });
+        
         // Sort by date (newest first) and get the most recent ones
-        const sortedLaunches = data
+        const sortedLaunches = filteredLaunches
           .sort((a, b) => new Date(b.date_utc) - new Date(a.date_utc))
-          .slice(0, 7); // Get the 10 most recent launches
+          .slice(0, 7); // Get the 7 most recent launches
         
         setLaunches(sortedLaunches);
         
@@ -71,7 +77,7 @@ const LaunchList = () => {
           <div key={launch.id} className="launch-card">
             <div className="launch-image">
               {launch.links?.patch?.small ? (
-                <img src={launch.links.patch.small} alt={`${launch.name} mission patch`} />
+                <img src={launch.links.flickr.original} alt={`${launch.name} mission patch`} />
               ) : (
                 <div className="placeholder-image">X</div>
               )}
