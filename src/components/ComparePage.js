@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import '../comp_styles/ComparePage.css';
 
 const ComparePage = () => {
   const [searchQuery1, setSearchQuery1] = useState('');
@@ -164,28 +165,6 @@ const ComparePage = () => {
           )}
         </div>
       </div>
-
-      {/* Styles */}
-      <style jsx>{`
-        .dropdown {
-          position: absolute;
-          border: 1px solid #ccc;
-          width: 30%;
-          max-height: 200px;
-          overflow-y: auto;
-          box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-          margin-top: 7%;
-          background: #000000;
-        }
-        .dropdown-item {
-          padding: 10px;
-          cursor: pointer;
-          transition: background 0.2s;
-        }
-        .dropdown-item:hover {
-          background:rgb(19, 19, 19);
-        }
-      `}</style>
     </div>
   );
 };
