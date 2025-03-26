@@ -111,6 +111,7 @@ const ComparePage = () => {
           {launch1 && (
             <div className="launch-details">
               <h2>{launch1.name}</h2>
+              <p>{launch1.details || 'No details available for this launch.'}</p>
               <p><strong>Flight Number:</strong> {launch1.flight_number}</p>
               <p><strong>Date:</strong> {new Date(launch1.date_utc).toLocaleDateString()}</p>
             </div>
@@ -157,8 +158,9 @@ const ComparePage = () => {
           {isLoading2 && <p>Loading...</p>}
           {error2 && <p className="error-message">{error2}</p>}
           {launch2 && (
-            <div className="launch-details">
+            <div className="launch-details" >
               <h2>{launch2.name}</h2>
+              <p>{launch2.details || 'No details available for this launch.'}</p>
               <p><strong>Flight Number:</strong> {launch2.flight_number}</p>
               <p><strong>Date:</strong> {new Date(launch2.date_utc).toLocaleDateString()}</p>
             </div>
