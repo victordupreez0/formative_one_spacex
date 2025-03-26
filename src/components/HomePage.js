@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import SLogo from '../Images/SpaceX_Logo1.svg';
 import LaunchList from './LaunchList';
-import './compStyles/HomePage.css';
+import '../comp_styles/HomePage.css';
 
 const HomePage = () => {
   const [searchQuery, setSearchQuery] = useState('');

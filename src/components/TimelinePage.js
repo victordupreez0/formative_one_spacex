@@ -1,4 +1,5 @@
 import React from 'react';
+import '../comp_styles/TimelinePage.css';
 
 const TimelinePage = () => {
   return (
