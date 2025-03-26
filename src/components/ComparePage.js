@@ -22,8 +22,6 @@ const ComparePage = () => {
   const [rocketDetails2, setRocketDetails2] = useState(null);
   const [payloadDetails1, setPayloadDetails1] = useState(null);
   const [payloadDetails2, setPayloadDetails2] = useState(null);
-  const [coreDetails1, setCoreDetails1] = useState(null);
-  const [coreDetails2, setCoreDetails2] = useState(null);
   const [payloadWeights1, setPayloadWeights1] = useState([]);
   const [payloadWeights2, setPayloadWeights2] = useState([]);
 
@@ -37,7 +35,7 @@ const ComparePage = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           query: { name: { $regex: query, $options: 'i' } },
-          options: { limit: 5 },
+          options: { limit: 100 },
         }),
       });
 
@@ -107,19 +105,6 @@ const ComparePage = () => {
     }
   };
 
-  // Function to fetch core details
-  const fetchCoreDetails = async (coreId, setCoreDetails) => {
-    if (!coreId) return;
-
-    try {
-      const response = await fetch(`https://api.spacexdata.com/v4/cores/${coreId}`);
-      const data = await response.json();
-      setCoreDetails(data);
-    } catch (error) {
-      console.error('Error fetching core details:', error);
-    }
-  };
-
   // Function to fetch payload weights
   const fetchPayloadWeights = async (launch, setPayloadWeights) => {
     if (!launch) return;
@@ -137,7 +122,6 @@ const ComparePage = () => {
     if (launch1) {
       fetchRocketDetails(launch1.rocket, setRocketDetails1);
       fetchPayloadDetails(launch1.payloads[0], setPayloadDetails1);
-      fetchCoreDetails(launch1.cores[0].core, setCoreDetails1);
       fetchPayloadWeights(launch1, setPayloadWeights1);
     }
   }, [launch1]);
@@ -146,7 +130,6 @@ const ComparePage = () => {
     if (launch2) {
       fetchRocketDetails(launch2.rocket, setRocketDetails2);
       fetchPayloadDetails(launch2.payloads[0], setPayloadDetails2);
-      fetchCoreDetails(launch2.cores[0].core, setCoreDetails2);
       fetchPayloadWeights(launch2, setPayloadWeights2);
     }
   }, [launch2]);

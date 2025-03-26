@@ -114,7 +114,7 @@ const HomePage = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           query: { name: { $regex: query, $options: 'i' } },
-          options: { limit: 5 },
+          options: { limit: 100 },
         }),
       });
 
@@ -132,7 +132,7 @@ const HomePage = () => {
 
   // Extract YouTube video ID from the webcast link
   const getYouTubeVideoId = (url) => {
-    const match = url.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+    const match = url.match(/(?:https?:)?(?:www\.)?(?:youtube\.com(?:[^\n\s]+\S+|(?:v|e(?:mbed)?)|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
     return match ? match[1] : null;
   };
 
@@ -144,7 +144,7 @@ const HomePage = () => {
         <div className="hero-content">
           <img src={SLogo} alt=''></img>
           <h1 className="big-header">
-            LAUNCH ASSISTANT
+            Launch Assistant
           </h1>
 
           <p className="hero-text">
@@ -174,11 +174,11 @@ const HomePage = () => {
       </div>
       <LaunchList/>
       <div className="launch-lookup">
-        <h2>LAUNCH LOOKUP</h2>
+        <h2>Launch Lookup</h2>
         <div className="search-container">
           <input 
             type="text" 
-            placeholder="SEARCH..." 
+            placeholder="Search..." 
             className="search-input" 
             value={searchQuery}
             onChange={handleSearchChange}
@@ -186,7 +186,7 @@ const HomePage = () => {
             onFocus={() => setShowDropdown(true)}
             onBlur={() => setTimeout(() => setShowDropdown(false), 200)}
           />
-          <button className="search-button" onClick={searchLaunch}>SEARCH</button>
+          <button className="search-button" onClick={searchLaunch}>Search</button>
           {showDropdown && suggestions.length > 0 && (
             <div className="dropdown">
               {suggestions.map((launch) => (
@@ -206,10 +206,11 @@ const HomePage = () => {
       </div>
 
       <div className="featured-launch" style={{ backgroundImage: `url(${backgroundImageUrl})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
-        <div className="featured-content">
+        <div className="overlay" style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)', position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}></div>
+        <div className="featured-content" style={{ position: 'relative' }}>
           <div className="featured-text">
-            <h3>FEATURED LAUNCH</h3>
-            <h2>{featuredLaunch ? featuredLaunch.name : 'LAUNCH NAME'}</h2>
+            <h3>Featured Launch</h3>
+            <h2>{featuredLaunch ? featuredLaunch.name : 'Launch Name'}</h2>
             <p>
               {featuredLaunch ? featuredLaunch.details || 'No details available for this launch.' : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'}
             </p>
@@ -226,38 +227,37 @@ const HomePage = () => {
                 ></iframe>
               ) : (
                 featuredLaunch && featuredLaunch.links.webcast && (
-                  <a href={featuredLaunch.links.webcast} target="_blank" rel="noopener noreferrer" className="action-button">WATCH</a>
+                  <a href={featuredLaunch.links.webcast} target="_blank" rel="noopener noreferrer" className="action-button">Watch</a>
                 )
               )}
               {featuredLaunch && featuredLaunch.links.article && (
-                <a href={featuredLaunch.links.article} target="_blank" rel="noopener noreferrer" className="action-button">ARTICLE</a>
-              )}
-              {!featuredLaunch && (
-
-                  <button className="action-button">BUTTON</button>
-
+                <Button href={featuredLaunch.links.article}>Article</Button>
               )}
             </div>
           </div>
           <div className="featured-headers">
+            <div className="launch-info">
             <h3>LAUNCH INFO:</h3>
             {featuredLaunch && (
-              <div className="rocket-info">
+              <div className="launch-info-content">
                 <p><strong>Date:</strong> {new Date(featuredLaunch.date_utc).toLocaleDateString()}</p>
                 <p><strong>Landing Attempt:</strong> {featuredLaunch.cores && featuredLaunch.cores[0]?.landing_attempt ? 'Yes' : 'No'}</p>
                 <p><strong>Landing Success:</strong> {featuredLaunch.cores && featuredLaunch.cores[0]?.landing_success ? 'Yes' : 'No'}</p>
                 <p><strong>Flight Number:</strong> {featuredLaunch.flight_number}</p>
               </div>
             )}
+            </div>
+            <div className="rocket-info">
             <h3>ROCKET INFO:</h3>
             {rocketInfo && (
-              <div className="launch-technical-info">
+              <div className="rocket-info-content">
                 <p><strong>Name:</strong> {rocketInfo.name}</p>
                 <p><strong>Type of Engine:</strong> {rocketInfo.engines.type}</p>
                 <p><strong>Description:</strong> {rocketInfo.description}</p>
                 <p><strong>Cost:</strong> ${rocketInfo.cost_per_launch.toLocaleString()}</p>
               </div>
             )}
+            </div>
           </div>
         </div>
       </div>

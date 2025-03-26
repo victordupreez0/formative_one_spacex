@@ -3,7 +3,7 @@ import '../comp_styles/Button.css';
 
 const Button = ({ href, children }) => {
   return (
-    <a href={href} className="button">
+    <a href={href} className="button" target='_blank' rel='noreferrer'>
       {children}
     </a>
   );

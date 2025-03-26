@@ -1,0 +1,167 @@
+/* Launch section */
+.section-title {
+    text-align: left;
+    margin-bottom: 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #ccc;
+  }
+  
+  .launch-container {
+    width: 100%;
+    overflow-x: auto; /* Allow horizontal scrolling for the launch list */
+  }
+  
+  .launch-list {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    padding-bottom: 20px;
+    scrollbar-width: thin;
+    scrollbar-color: #666 #222;
+  }
+  
+  .launch-list::-webkit-scrollbar {
+    height: 8px;
+  }
+  
+  .launch-list::-webkit-scrollbar-track {
+    background: #222;
+    border-radius: 4px;
+  }
+  
+  .launch-list::-webkit-scrollbar-thumb {
+    background-color: #666;
+    border-radius: 4px;
+  }
+  
+  /* Launch Card Styling */
+  .launch-card {
+    min-width: 240px;
+    max-width: 240px;
+    background-color: #333;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s;
+  }
+  
+  .launch-card:hover {
+    transform: translateY(-5px);
+  }
+  
+.launch-image {
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background: #222;
+}
+
+.launch-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
+  
+  .placeholder-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 48px;
+    color: #555;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .launch-content {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    text-align: left;
+    margin-top: -15%;
+  }
+  
+  .launch-name {
+    margin: 0 0 5px 0;
+    font-size: 28px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .rocket-name {
+    font-size: 14px;
+    margin: 0 0 3px 0;
+    color: #ccc;
+  }
+  
+  .mission-outcome {
+    font-size: 12px;
+    margin: 0 0 10px 0;
+    color: #aaa;
+  }
+  
+  .launch-description {
+    margin: 0 0 15px 0;
+    font-size: 12px;
+    color: #ddd;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    flex-grow: 1;
+  }
+  
+  .detail-button {
+    align-self: flex-start;
+    background: transparent;
+    border: 1px solid white;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 12px;
+    text-transform: uppercase;
+    transition: all 0.2s;
+  }
+  
+  .detail-button:hover {
+    background: white;
+    color: #333;
+  }
+  
+  .search-container {
+    display: flex;
+    margin-bottom: 20px;
+  }
+  
+  .search-input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+  }
+  
+  .search-button {
+    padding: 10px 20px;
+    background-color: #222;
+    color: white;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+  }
+  
+  .search-button:hover {
+    background-color: #444;
+  }
+  
+  .error-message {
+    color: red;
+    margin-top: 5px;
+  }

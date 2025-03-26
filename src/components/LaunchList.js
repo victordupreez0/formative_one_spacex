@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import Button  from './Button';
+import '../comp_styles/LaunchList.css';
 
 const LaunchList = () => {
   const [launches, setLaunches] = useState([]);
@@ -88,10 +90,10 @@ const LaunchList = () => {
               <p className="mission-outcome">
                 {launch.success === null ? "UPCOMING" : launch.success ? "SUCCESS" : "FAILURE"}
               </p>
-              <p className="launch-details">
+              <p className="launch-description">
                 {launch.details || "No details available for this launch."}
               </p>
-              <button className="detail-button">DETAIL</button>
+              <Button href={launch.links.article}>Details</Button>
             </div>
           </div>
         ))}
