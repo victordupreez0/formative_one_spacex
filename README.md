@@ -3,6 +3,8 @@
 
 This project aims to use React to display and compare data extracted from the SpaceX api by jackwmeyer. This API gives data on specific launches and branches out with a number of different endpoints to display the launch details, rocket details, payload details and more. 
 
+Repo link: https://github.com/victordupreez0/formative_one_spacex.git
+
 
 ## Built With
 
