@@ -33,7 +33,7 @@ const TimelinePage = () => {
       chartInstanceRef.current.destroy();
     }
 
-    const labels = launchData.map(launch => new Date(launch.date_utc).toLocaleDateString());
+    const labels = launchData.map(launch => new Date(launch.date_utc).getFullYear().toString());
     let data, title;
     switch (chartType) {
       case 'flight_number':
@@ -41,20 +41,36 @@ const TimelinePage = () => {
         title = 'Flight Numbers Over Time';
         break;
       case 'payload_mass':
-        data = launchData.map(launch => launch.payloads.reduce((sum, payload) => sum + (payload.mass_kg || 0), 0));
-        title = 'Payload Mass Over Time';
+        data = launchData.reduce((acc, launch, index) => {
+          const payloadCount = launch.payloads.length;
+          acc.push((acc[index - 1] || 0) + payloadCount);
+          return acc;
+        }, []);
+        title = 'Cumulative Payloads Launched Over Time';
         break;
       case 'launch_success':
-        data = launchData.map(launch => launch.success ? 1 : 0);
-        title = 'Launch Success Over Time';
+        data = launchData.reduce((acc, launch, index) => {
+          const success = launch.success ? 1 : 0;
+          acc.push((acc[index - 1] || 0) + success);
+          return acc;
+        }, []);
+        title = 'Cumulative Launch Successes Over Time';
         break;
       case 'cores_reused':
-        data = launchData.map(launch => launch.cores.reduce((sum, core) => sum + (core.reused ? 1 : 0), 0));
-        title = 'Cores Reused Over Time';
+        data = launchData.reduce((acc, launch, index) => {
+          const reusedCores = launch.cores.reduce((sum, core) => sum + (core.reused ? 1 : 0), 0);
+          acc.push((acc[index - 1] || 0) + reusedCores);
+          return acc;
+        }, []);
+        title = 'Cumulative Cores Reused Over Time';
         break;
       case 'fairings_recovered':
-        data = launchData.map(launch => launch.fairings && launch.fairings.recovered ? 1 : 0);
-        title = 'Fairings Recovered Over Time';
+        data = launchData.reduce((acc, launch, index) => {
+          const deployedFairings = launch.fairings ? 2 : 0; // Assuming 2 fairings per launch if present
+          acc.push((acc[index - 1] || 0) + deployedFairings);
+          return acc;
+        }, []);
+        title = 'Cumulative Fairings Deployed Over Time';
         break;
       default:
         data = launchData.map(launch => launch.flight_number);
@@ -93,17 +109,15 @@ const TimelinePage = () => {
       <h1 className="page-title">TIMELINE</h1>
       
       <div className="timeline-filters">
-        <button className="filter-button" onClick={() => setChartType('flight_number')}>Flight Number</button>
-        <button className="filter-button" onClick={() => setChartType('payload_mass')}>Payload Mass</button>
+        <button className="filter-button" onClick={() => setChartType('flight_number')}>Number of Flights</button>
+        <button className="filter-button" onClick={() => setChartType('payload_mass')}>Payloads Launched</button>
         <button className="filter-button" onClick={() => setChartType('launch_success')}>Launch Success</button>
         <button className="filter-button" onClick={() => setChartType('cores_reused')}>Cores Reused</button>
-        <button className="filter-button" onClick={() => setChartType('fairings_recovered')}>Fairings Recovered</button>
+        <button className="filter-button" onClick={() => setChartType('fairings_recovered')}>Fairings Deployed</button>
       </div>
       
       <div className="timeline-chart">
-        <div className="chart-container" style={{ position: 'relative', height: '100%', width: '100%' }}>
           <canvas ref={chartRef}></canvas>
-        </div>
       </div>
     </div>
   );

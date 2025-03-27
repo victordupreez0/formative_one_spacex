@@ -164,7 +164,7 @@ const ComparePage = () => {
     };
   };
 
-  const generateBarChartData = (rocketDetails1, rocketDetails2) => {
+  const generateBarChartData = (rocketDetails1, rocketDetails2, payloadDetails1, payloadDetails2) => {
     return {
       labels: ['Rocket Height (m)', 'Rocket Diameter (m)', 'Number of Engines'],
       datasets: [
@@ -190,14 +190,18 @@ const ComparePage = () => {
     };
   };
 
-  const generatePolarAreaChartData = (payloadWeights) => {
+  const generatePolarAreaChartData = (payloadDetails) => {
     return {
-      labels: payloadWeights.map(weight => weight.name),
+      labels: ['Periapsis (km)', 'Apoapsis (km)', 'Semi-Major Axis (km)'],
       datasets: [
         {
-          data: payloadWeights.map(weight => weight.kg),
-          backgroundColor: ['#A9A9A9', '#D3D3D3', '#B0C4DE', '#778899'],
-          hoverBackgroundColor: ['#A9A9A9', '#D3D3D3', '#B0C4DE', '#778899'],
+          data: [
+            payloadDetails?.periapsis_km || 0,
+            payloadDetails?.apoapsis_km || 0,
+            payloadDetails?.semi_major_axis_km || 0, 
+          ],
+          backgroundColor: ['#A9A9A9', '#D3D3D3', '#B0C4DE'],
+          hoverBackgroundColor: ['#A9A9A9', '#D3D3D3', '#B0C4DE'],
         },
       ],
     };
@@ -211,11 +215,11 @@ const ComparePage = () => {
         {/* Left Side */}
         <div className="comparison-side">
           <h2>Launch 1 Lookup</h2>
-          <div className="search-container">
+          <div className="search-container-compare">
             <input
               type="text"
               placeholder="Search Launch 1..."
-              className="search-input"
+              className="search-input-compare"
               value={searchQuery1}
               onChange={(e) => {
                 setSearchQuery1(e.target.value);
@@ -260,7 +264,7 @@ const ComparePage = () => {
                     <Pie data={generateChartData(payloadDetails1)} />
                   </div>
                   <div className="chart-container">
-                    <PolarArea data={generatePolarAreaChartData(payloadWeights1)} />
+                    <PolarArea data={generatePolarAreaChartData(payloadDetails1)} />
                   </div>
                 </div>
               )}
@@ -270,28 +274,30 @@ const ComparePage = () => {
 
         {/* Middle Section */}
         <div className="comparison-middle">
-          <h1 className="vs-text">VS</h1>
           {rocketDetails1 && rocketDetails2 && (
-            <div className="bar-chart" style={{ width: '100%'}}>
-              <Bar
-                data={generateBarChartData(rocketDetails1, rocketDetails2)}
-                options={{
-                  indexAxis: 'y',
-                  maintainAspectRatio: false,
-                }}
-              />
-            </div>
+            <>
+              <h1 className="vs-text">VS</h1>
+              <div className="chart-container" style={{ height: '30%' }}>
+                <Bar
+                  data={generateBarChartData(rocketDetails1, rocketDetails2, payloadDetails1, payloadDetails2)}
+                  options={{
+                    indexAxis: 'y',
+                    maintainAspectRatio: false,
+                  }}
+                />
+              </div>
+            </>
           )}
         </div>
 
         {/* Right Side */}
         <div className="comparison-side">
           <h2>Launch 2 Lookup</h2>
-          <div className="search-container">
+          <div className="search-container-compare">
             <input
               type="text"
               placeholder="Search Launch 2..."
-              className="search-input"
+              className="search-input-compare"
               value={searchQuery2}
               onChange={(e) => {
                 setSearchQuery2(e.target.value);
@@ -336,7 +342,7 @@ const ComparePage = () => {
                     <Pie data={generateChartData(payloadDetails2)} />
                   </div>
                   <div className="chart-container">
-                    <PolarArea data={generatePolarAreaChartData(payloadWeights2)} />
+                    <PolarArea data={generatePolarAreaChartData(payloadDetails2)} />
                   </div>
                 </div>
               )}

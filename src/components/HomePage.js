@@ -188,9 +188,9 @@ const HomePage = () => {
           />
           <button className="search-button" onClick={searchLaunch}>Search</button>
           {showDropdown && suggestions.length > 0 && (
-            <div className="dropdown">
+            <div className="dropdown-home">
               {suggestions.map((launch) => (
-                <div key={launch.id} className="dropdown-item" onMouseDown={() => {
+                <div key={launch.id} className="dropdown-item-home" onMouseDown={() => {
                   setSearchQuery(launch.name);
                   searchLaunch();
                   setShowDropdown(false);
@@ -237,7 +237,7 @@ const HomePage = () => {
           </div>
           <div className="featured-headers">
             <div className="launch-info">
-            <h3>LAUNCH INFO:</h3>
+            <h3>LAUNCH DETAILS:</h3>
             {featuredLaunch && (
               <div className="launch-info-content">
                 <p><strong>Date:</strong> {new Date(featuredLaunch.date_utc).toLocaleDateString()}</p>
@@ -253,6 +253,7 @@ const HomePage = () => {
               <div className="rocket-info-content">
                 <p><strong>Name:</strong> {rocketInfo.name}</p>
                 <p><strong>Type of Engine:</strong> {rocketInfo.engines.type}</p>
+                <p><strong>Thrust-to-Weight Ratio:</strong> {(rocketInfo.engines.thrust_to_weight || 'N/A')}</p>
                 <p><strong>Description:</strong> {rocketInfo.description}</p>
                 <p><strong>Cost:</strong> ${rocketInfo.cost_per_launch.toLocaleString()}</p>
               </div>
