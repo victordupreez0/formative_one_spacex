@@ -1,4 +1,3 @@
-/* Launch section */
 .section-title {
     text-align: left;
     margin-bottom: 20px;
@@ -10,7 +9,7 @@
   
   .launch-container {
     width: 100%;
-    overflow-x: auto; /* Allow horizontal scrolling for the launch list */
+    overflow-x: auto; 
   }
   
   .launch-list {
@@ -35,8 +34,7 @@
     background-color: #666;
     border-radius: 4px;
   }
-  
-  /* Launch Card Styling */
+
   .launch-card {
     min-width: 240px;
     max-width: 240px;

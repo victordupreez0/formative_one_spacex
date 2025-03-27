@@ -22,8 +22,6 @@ const ComparePage = () => {
   const [rocketDetails2, setRocketDetails2] = useState(null);
   const [payloadDetails1, setPayloadDetails1] = useState(null);
   const [payloadDetails2, setPayloadDetails2] = useState(null);
-  const [payloadWeights1, setPayloadWeights1] = useState([]);
-  const [payloadWeights2, setPayloadWeights2] = useState([]);
 
   // Function to fetch suggestions
   const fetchSuggestions = async (query, setSuggestions) => {
@@ -103,24 +101,10 @@ const ComparePage = () => {
     }
   };
 
-  // Function to fetch payload weights
-  const fetchPayloadWeights = async (launch, setPayloadWeights) => {
-    if (!launch) return;
-
-    try {
-      const response = await fetch(`https://api.spacexdata.com/v4/rockets/${launch.rocket}`);
-      const data = await response.json();
-      setPayloadWeights(data.payload_weights);
-    } catch (error) {
-      console.error('Error fetching payload weights:', error);
-    }
-  };
-
   useEffect(() => {
     if (launch1) {
       fetchRocketDetails(launch1.rocket, setRocketDetails1);
       fetchPayloadDetails(launch1.payloads[0], setPayloadDetails1);
-      fetchPayloadWeights(launch1, setPayloadWeights1);
     }
   }, [launch1]);
 
@@ -128,7 +112,6 @@ const ComparePage = () => {
     if (launch2) {
       fetchRocketDetails(launch2.rocket, setRocketDetails2);
       fetchPayloadDetails(launch2.payloads[0], setPayloadDetails2);
-      fetchPayloadWeights(launch2, setPayloadWeights2);
     }
   }, [launch2]);
 

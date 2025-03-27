@@ -54,10 +54,10 @@ npm start
 ## Development Process
 
 ### Highlights 
-Some things i'm really proud of is the featued launch section on the home page, and the imagery over the whole page looks pretty good.
+Some things i'm really proud of is the featued launch section on the home page, and the imagery over the whole page looks pretty decent.
 
 ### Challenges
-Because this was my first React project, there were a lot of new concepts and features that provided a bit of a learning curve. 
+Because this was my first React project, there were a lot of new concepts and features that provided a bit of a learning curve. The search functionality proved to be difficult to get right using the GET method, but works perfectly with POST, I should look into more advanced searches using the GET method.
 ## Demo
 
 Insert gif or link to demo

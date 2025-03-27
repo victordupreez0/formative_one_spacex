@@ -15,7 +15,7 @@
     flex-direction: column;
     gap: 30px;
     width: 100%;
-    overflow-x: hidden; /* Prevent horizontal scrolling */
+    overflow-x: hidden; 
   }
   
   .hero-section {
@@ -134,7 +134,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-size: 100% 100%;
+    background-size: cover;
     z-index: 1;
   }
   
@@ -204,3 +204,131 @@
   .dropdown-item-home:hover {
     background: rgb(19, 19, 19);
   }
+
+.random-launch-container {
+  margin-top: 20px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    height: 300px;
+    background-size: cover;
+  }
+
+  .hero-content {
+    max-width: 100%;
+    padding: 15px;
+    background-image: url(../Images/homeBG.jpg);
+    background-size: cover;
+    overflow-y: hidden;
+  }
+
+  .big-header {
+    font-size: 28px; 
+  }
+
+  .big-header2 {
+    font-size: 40px; 
+
+  .stats-section {
+    flex-direction: column;
+    gap: 15px; 
+  }
+
+  .stat-card {
+    text-align: center;
+    padding: 10px; 
+  }
+
+  .featured-headers h3 {
+    font-size: 24px; 
+  }
+
+  .featured-headers p {
+    font-size: 12px; 
+  }
+
+  .featured-headers {
+    position: fixed;
+  }
+
+  .launch-lookup {
+    overflow-x: hidden;
+  }
+
+  .search-input {
+    width: 200px;
+  }
+}}
+
+@media (max-width: 480px) {
+  .hero-section {
+    height: 200px;
+  }
+
+  .hero-content {
+    height: fit-content;
+  }
+
+  .hero-content img {
+    position: ;
+  }
+
+
+  .big-header {
+    font-size: 20px; 
+  }
+
+  .big-header2 {
+    font-size: 32px; 
+  }
+
+  .stats-section {
+    gap: 10px;
+  }
+
+  .stat-card h3 {
+    font-size: 10px; 
+  }
+
+  .stat-value {
+    font-size: 20px; 
+  }
+
+  .featured-headers h3 {
+    font-size: 20px; 
+  }
+
+  .featured-headers p {
+    font-size: 10px; 
+  }
+
+  .button-group {
+    flex-direction: column; 
+    gap: 5px; 
+  }
+
+  .launch-lookup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  .stats-section {
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+  }
+
+  .launch-lookup {
+    overflow-x: hidden;
+  }
+
+  .search-input {
+    width: 200px;
+  }
+}

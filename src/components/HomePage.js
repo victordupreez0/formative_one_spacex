@@ -64,16 +64,25 @@ const HomePage = () => {
     setError(null);
 
     try {
-      // Fetch all launches and filter locally
-      const response = await fetch('https://api.spacexdata.com/v4/launches');
+      const response = await fetch('https://api.spacexdata.com/v4/launches/query', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          query: {
+            name: { $regex: searchQuery, $options: 'i' },
+          },
+          options: {
+            limit: 1,
+          },
+        }),
+      });
+
       const data = await response.json();
 
-      const filteredLaunches = data.filter(launch =>
-        launch.name.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-
-      if (filteredLaunches.length > 0) {
-        setFeaturedLaunch(filteredLaunches[0]);
+      if (data.docs.length > 0) {
+        setFeaturedLaunch(data.docs[0]);
       } else {
         setError('No launch found matching your search');
       }
@@ -96,16 +105,48 @@ const HomePage = () => {
     if (!query.trim()) return;
 
     try {
-      const response = await fetch('https://api.spacexdata.com/v4/launches');
+      const response = await fetch('https://api.spacexdata.com/v4/launches/query', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          query: {
+            name: { $regex: query, $options: 'i' },
+          },
+          options: {
+            limit: 100,
+          },
+        }),
+      });
+
       const data = await response.json();
-
-      const filteredSuggestions = data.filter(launch =>
-        launch.name.toLowerCase().includes(query.toLowerCase())
-      );
-
-      setSuggestions(filteredSuggestions);
+      setSuggestions(data.docs);
     } catch (error) {
       console.error('Error fetching suggestions:', error);
+    }
+  };
+
+  const fetchRandomLaunch = async () => {
+    try {
+      const response = await fetch('https://api.spacexdata.com/v4/launches');
+      const launchesData = await response.json();
+
+      let randomLaunch;
+      do {
+        randomLaunch = launchesData[Math.floor(Math.random() * launchesData.length)];
+      } while (!randomLaunch.links.flickr.original.length);
+
+      setFeaturedLaunch(randomLaunch);
+
+      // Fetch rocket info for the random launch
+      if (randomLaunch) {
+        const rocketResponse = await fetch(`https://api.spacexdata.com/v4/rockets/${randomLaunch.rocket}`);
+        const rocketData = await rocketResponse.json();
+        setRocketInfo(rocketData);
+      }
+    } catch (error) {
+      console.error('Error fetching random launch:', error);
     }
   };
 
@@ -195,7 +236,7 @@ const HomePage = () => {
         <div className="overlay" style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)', position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}></div>
         <div className="featured-content" style={{ position: 'relative' }}>
           <div className="featured-text">
-            <h3>Featured Launch</h3>
+            <h3>{searchQuery.trim() && featuredLaunch ? 'Search Result' : 'Featured Launch'}</h3>
             <h2>{featuredLaunch ? featuredLaunch.name : 'Launch Name'}</h2>
             <p>
               {featuredLaunch ? featuredLaunch.details || 'No details available for this launch.' : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'}
@@ -247,6 +288,15 @@ const HomePage = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      <div className="random-launch-container" style={{ textAlign: 'center', marginTop: '20px' }}>
+        <button
+          className="button"
+          onClick={fetchRandomLaunch} // Update to call fetchRandomLaunch function
+        >
+          Random Launch
+        </button>
       </div>
     </div>
   );

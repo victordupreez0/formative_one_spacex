@@ -31,3 +31,29 @@
   .nav-links a.active {
     color: #999;
   }
+
+@media (max-width: 768px) {
+  .navbar {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border-right: none;
+    border-bottom: 1px solid #333;
+  }
+
+  .nav-links {
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  .nav-links a {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-links a {
+    font-size: 8px;
+  }
+}

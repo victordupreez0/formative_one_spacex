@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Chart, LineElement, PointElement, LineController, CategoryScale, LinearScale, Title, Tooltip, Legend } from 'chart.js';
 import '../comp_styles/TimelinePage.css';
 
-// Register ChartJS components
 Chart.register(LineElement, PointElement, LineController, CategoryScale, LinearScale, Title, Tooltip, Legend);
 
 const TimelinePage = () => {
@@ -66,7 +65,7 @@ const TimelinePage = () => {
         break;
       case 'fairings_recovered':
         data = launchData.reduce((acc, launch, index) => {
-          const deployedFairings = launch.fairings ? 2 : 0; // Assuming 2 fairings per launch if present
+          const deployedFairings = launch.fairings ? 2 : 0; // 2 fairings are deployed per launch
           acc.push((acc[index - 1] || 0) + deployedFairings);
           return acc;
         }, []);
