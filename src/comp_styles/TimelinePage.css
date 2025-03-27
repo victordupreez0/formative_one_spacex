@@ -15,6 +15,18 @@
     cursor: pointer;
   }
   
+  .filter-button:hover {
+    background-color: white;
+    color: black;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .filter-button.current-chart-type {
+    background-color: white;
+    color: black;
+    font-weight: bold;
+  }
+  
   .timeline-chart {
     background-color: #333;
     border-radius: 5px;
@@ -58,4 +70,3 @@
     right: 0;
     text-align: center;
   }
-  

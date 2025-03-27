@@ -261,9 +261,11 @@ const ComparePage = () => {
               {rocketDetails1 && (
                 <div className="rocket-details">
                   <div className="chart-container">
+                    <h2>Payload Theoretical Data</h2>
                     <Pie data={generateChartData(payloadDetails1)} />
                   </div>
                   <div className="chart-container">
+                  <h2>Payload Orbital Data</h2>
                     <PolarArea data={generatePolarAreaChartData(payloadDetails1)} />
                   </div>
                 </div>
@@ -278,6 +280,7 @@ const ComparePage = () => {
             <>
               <h1 className="vs-text">VS</h1>
               <div className="chart-container" style={{ height: '30%' }}>
+              <h2>Rocket Data</h2>
                 <Bar
                   data={generateBarChartData(rocketDetails1, rocketDetails2, payloadDetails1, payloadDetails2)}
                   options={{
@@ -339,9 +342,11 @@ const ComparePage = () => {
               {rocketDetails2 && (
                 <div className="rocket-details">
                   <div className="chart-container">
+                  <h2>Payload Theoretical Data</h2>
                     <Pie data={generateChartData(payloadDetails2)} />
                   </div>
                   <div className="chart-container">
+                  <h2>Payload Orbital Data</h2>
                     <PolarArea data={generatePolarAreaChartData(payloadDetails2)} />
                   </div>
                 </div>

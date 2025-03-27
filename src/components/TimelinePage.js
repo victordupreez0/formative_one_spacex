@@ -109,11 +109,36 @@ const TimelinePage = () => {
       <h1 className="page-title">TIMELINE</h1>
       
       <div className="timeline-filters">
-        <button className="filter-button" onClick={() => setChartType('flight_number')}>Number of Flights</button>
-        <button className="filter-button" onClick={() => setChartType('payload_mass')}>Payloads Launched</button>
-        <button className="filter-button" onClick={() => setChartType('launch_success')}>Launch Success</button>
-        <button className="filter-button" onClick={() => setChartType('cores_reused')}>Cores Reused</button>
-        <button className="filter-button" onClick={() => setChartType('fairings_recovered')}>Fairings Deployed</button>
+        <button
+          className={`filter-button ${chartType === 'flight_number' ? 'current-chart-type' : ''}`}
+          onClick={() => setChartType('flight_number')}
+        >
+          Number of Flights
+        </button>
+        <button
+          className={`filter-button ${chartType === 'payload_mass' ? 'current-chart-type' : ''}`}
+          onClick={() => setChartType('payload_mass')}
+        >
+          Payloads Launched
+        </button>
+        <button
+          className={`filter-button ${chartType === 'launch_success' ? 'current-chart-type' : ''}`}
+          onClick={() => setChartType('launch_success')}
+        >
+          Launch Success
+        </button>
+        <button
+          className={`filter-button ${chartType === 'cores_reused' ? 'current-chart-type' : ''}`}
+          onClick={() => setChartType('cores_reused')}
+        >
+          Cores Reused
+        </button>
+        <button
+          className={`filter-button ${chartType === 'fairings_recovered' ? 'current-chart-type' : ''}`}
+          onClick={() => setChartType('fairings_recovered')}
+        >
+          Fairings Deployed
+        </button>
       </div>
       
       <div className="timeline-chart">
