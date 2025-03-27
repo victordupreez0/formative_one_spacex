@@ -60,4 +60,4 @@ Some things i'm really proud of is the featued launch section on the home page, 
 Because this was my first React project, there were a lot of new concepts and features that provided a bit of a learning curve. The search functionality proved to be difficult to get right using the GET method, but works perfectly with POST, I should look into more advanced searches using the GET method.
 ## Demo
 
-Insert gif or link to demo
+[Insert gif or link to demo](https://drive.google.com/file/d/10c54lFJmnr71fEkgjyU9WEEk7oaRrIhF/view?usp=sharing)
