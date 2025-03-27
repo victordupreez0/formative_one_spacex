@@ -59,8 +59,3 @@ Because this was my first React project, there were a lot of new concepts and fe
 ## Demo
 
 Insert gif or link to demo
-
-
-## Wireframes
-
-![Wireframe](https://github.com/victordupreez0/formative_one_spacex/blob/main/Wireframes/Wireframes.png)
