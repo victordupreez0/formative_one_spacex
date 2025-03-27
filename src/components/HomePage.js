@@ -59,34 +59,21 @@ const HomePage = () => {
 
   const searchLaunch = async () => {
     if (!searchQuery.trim()) return;
-    
+
     setIsLoading(true);
     setError(null);
-    
+
     try {
-      // First try to search by name
-      const response = await fetch(`https://api.spacexdata.com/v5/launches/query`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          query: {
-            $or: [
-              { name: { $regex: searchQuery, $options: 'i' } },
-              { flight_number: parseInt(searchQuery) || 0 }
-            ]
-          },
-          options: {
-            limit: 1
-          }
-        })
-      });
-      
+      // Fetch all launches and filter locally
+      const response = await fetch('https://api.spacexdata.com/v4/launches');
       const data = await response.json();
-      
-      if (data.docs && data.docs.length > 0) {
-        setFeaturedLaunch(data.docs[0]);
+
+      const filteredLaunches = data.filter(launch =>
+        launch.name.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+
+      if (filteredLaunches.length > 0) {
+        setFeaturedLaunch(filteredLaunches[0]);
       } else {
         setError('No launch found matching your search');
       }
@@ -109,19 +96,14 @@ const HomePage = () => {
     if (!query.trim()) return;
 
     try {
-      const response = await fetch(`https://api.spacexdata.com/v5/launches/query`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          query: { name: { $regex: query, $options: 'i' } },
-          options: { limit: 100 },
-        }),
-      });
-
+      const response = await fetch('https://api.spacexdata.com/v4/launches');
       const data = await response.json();
-      if (data.docs) {
-        setSuggestions(data.docs);
-      }
+
+      const filteredSuggestions = data.filter(launch =>
+        launch.name.toLowerCase().includes(query.toLowerCase())
+      );
+
+      setSuggestions(filteredSuggestions);
     } catch (error) {
       console.error('Error fetching suggestions:', error);
     }
@@ -184,17 +166,21 @@ const HomePage = () => {
             onChange={handleSearchChange}
             onKeyPress={handleKeyPress}
             onFocus={() => setShowDropdown(true)}
-            onBlur={() => setTimeout(() => setShowDropdown(false), 200)}
+            onBlur={() => setTimeout(() => setShowDropdown(false), 200)} // Delay to allow click on dropdown items
           />
           <button className="search-button" onClick={searchLaunch}>Search</button>
           {showDropdown && suggestions.length > 0 && (
             <div className="dropdown-home">
               {suggestions.map((launch) => (
-                <div key={launch.id} className="dropdown-item-home" onMouseDown={() => {
-                  setSearchQuery(launch.name);
-                  searchLaunch();
-                  setShowDropdown(false);
-                }}>
+                <div
+                  key={launch.id}
+                  className="dropdown-item-home"
+                  onMouseDown={async () => {
+                    setSearchQuery(launch.name);
+                    setShowDropdown(false);
+                    await searchLaunch(); // Execute search after setting the query
+                  }}
+                >
                   {launch.name}
                 </div>
               ))}

@@ -38,7 +38,6 @@ const ComparePage = () => {
           options: { limit: 100 },
         }),
       });
-
       const data = await response.json();
       if (data.docs) {
         setSuggestions(data.docs);
@@ -64,7 +63,6 @@ const ComparePage = () => {
           options: { limit: 1 },
         }),
       });
-
       const data = await response.json();
       if (data.docs.length > 0) {
         setLaunch(data.docs[0]);
