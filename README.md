@@ -50,7 +50,7 @@ npm start
 
 ## Wireframes
 
-![Wireframe](https://github.com/victordupreez0/formative_one_spacex/blob/main/Wireframes/Wireframes.png)
+![Wireframe](https://github.com/victordupreez0/formative_one_spacex/blob/main/documentation/Wireframes/Wireframes.png)
 ## Development Process
 
 ### Highlights 
