@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import AboutPage from './components/ComparePage';
+import ComparePage from './components/ComparePage';
 import HomePage from './components/HomePage';
 import TimelinePage from './components/TimelinePage';
 import './App.css';
