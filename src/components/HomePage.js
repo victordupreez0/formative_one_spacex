@@ -195,7 +195,9 @@ const HomePage = () => {
           <h2 className="stat-value">{totalRockets}</h2>
         </div>
       </div>
+
       <LaunchList/>
+
       <div className="launch-lookup">
         <h2>Launch Lookup</h2>
         <div className="search-container">
